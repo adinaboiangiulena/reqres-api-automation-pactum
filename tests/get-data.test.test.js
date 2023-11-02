@@ -1,7 +1,7 @@
 const { spec, request } = require("pactum");
 const baseUrl = "https://reqres.in";
 const { faker } = require("@faker-js/faker");
-// const getAllUsersSchema = require("..data/response/get-all-users-schema.json");
+const getAllUsersSchema = require("../data/response/get-all-users.schema.json");
 
 const randomAvatar = faker.image.avatar();
 
@@ -14,13 +14,13 @@ describe("GET API Test set", () => {
     request.setDefaultTimeout(10000);
   });
 
-  // it("Get all users schema", async () => {
-  //   await spec()
-  //     .get(baseUrl + "/api/users/?page=2")
-  //     .expectStatus(200)
-  //     .expectJsonSchema(getAllUsersSchema);
+  it("Get all users schema", async () => {
+    await spec()
+      .get(baseUrl + "/api/users?page=2")
+      .expectStatus(200)
+      .expectJsonSchema(getAllUsersSchema);
 
-  // });
+  });
 
   it("Single user not found", async () => {
     await spec()

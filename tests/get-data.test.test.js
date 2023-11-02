@@ -19,7 +19,6 @@ describe("GET API Test set", () => {
       .get(baseUrl + "/api/users?page=2")
       .expectStatus(200)
       .expectJsonSchema(getAllUsersSchema);
-
   });
 
   it("Single user not found", async () => {

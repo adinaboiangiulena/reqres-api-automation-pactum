@@ -1,6 +1,5 @@
 const { spec, request } = require("pactum");
 const baseUrl = "https://reqres.in";
-const url = baseUrl + "/api/users/2";
 
 describe("DELETE API Test set ", () => {
   before(async () => {
@@ -8,6 +7,8 @@ describe("DELETE API Test set ", () => {
   });
 
   it("Delete test", async () => {
-    await spec().delete(url).expectStatus(204);
+    await spec()
+      .delete(baseUrl + "/api/users/2")
+      .expectStatus(204);
   });
 });

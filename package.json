@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "npx mocha tests --timeout=10000",
     "test:faker": "npx mocha tests --reporter mochawesome --reporter-options reportDir=results,reportFilename=report --timeout=10000"
   },
   "author": "",

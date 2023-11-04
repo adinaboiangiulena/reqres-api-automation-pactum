@@ -1,13 +1,6 @@
 const { spec, request } = require("pactum");
 const baseUrl = "https://reqres.in";
-const { faker } = require("@faker-js/faker");
 const getAllUsersSchema = require("../data/response/get-all-users.schema.json");
-
-const randomAvatar = faker.image.avatar();
-
-const requestBody = {
-  avatar: randomAvatar,
-};
 
 describe("GET API Test set", () => {
   before(async () => {
@@ -27,12 +20,17 @@ describe("GET API Test set", () => {
       .expectStatus(404);
   });
 
-  it("Get users by avatar", async () => {
-    console.log("The test passed. Here is your random avatar: " + randomAvatar);
+  it("Get single user with query parameters ", async () => {
     await spec()
       .get(baseUrl + "/api/users")
-      .withBody(requestBody)
-      .expectStatus(200);
+      .withQueryParams({ page: "2" })
+      .expectStatus(200)
+      .expectJsonMatch("page", 2)
+      .expectJsonMatch("data[0].id", 7)
+      .expectJsonMatch(
+        "data[0].avatar",
+        "https://reqres.in/img/faces/7-image.jpg"
+      );
   });
 
   it("Delayed response", async () => {
